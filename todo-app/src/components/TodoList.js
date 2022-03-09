@@ -40,7 +40,7 @@ class TodoList extends Component {
     this.setState({ list: updatedList });
   };
   editHandler = (item) => {
-    console.log(item);
+    console.log('todolist:',item);
      this.props.handleTodosInEdit(item)
     // const updatedList = this.state.list.filter(todo => todo.id !== item.id)
 
@@ -60,7 +60,7 @@ class TodoList extends Component {
                 id={item.id}
                 title={item.value}
                 remove={() => this.deleteHandler(item)}
-                edit={()=>{this.editHandler(item)}}
+                edit={this.editHandler}
               />
             ))}
           </Col>

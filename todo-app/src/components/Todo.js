@@ -17,7 +17,7 @@ class Todo extends Component {
     list.push(task);
     this.setState({
       list,
-      editTast:'this is edit task'
+      // editTast:'this is edit task'
     });
   };
   removeHandlerInTodoForRemovingProps = (task) => {
@@ -25,11 +25,30 @@ class Todo extends Component {
       list: this.state.list.filter((todo) => todo.id !== task.id),
     });
   };
-  editHandlerInTodoForEditingProps = (task) => {
-    console.log('from edit in todo: ',task);
-    this.setState({
-      editTast:task
+  editHandlerInTodoForEditingProps = (item) => {
+    console.log('from edit in todo: ', item);
+    this.state.list.map(items => {
+      if (items.id === item.id) {        
+        // this.setState((prevState) => ({
+        //   list:{
+        //     ...prevState.list,
+        //     value:item.task
+        //   }
+        //     }))
+        this.setState(prevState => ({
+          list: {
+            ...prevState.list,
+            value:item.task
+         }
+       }))
+        console.log('map:',items);
+      }
     })
+    // console.log('find', this.state.list.find(item=>item.id===task.id));
+    // this.setState({
+    //   editTast:task
+    // })
+
   }
   render() {
     return (

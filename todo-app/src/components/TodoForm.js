@@ -8,26 +8,27 @@ import {
   Button,
 } from "react-bootstrap";
 import { BsPlusLg } from "react-icons/bs";
+import {v4} from 'uuid'
 
 class TodoForm extends Component {
   constructor() {
     super();
     this.state = {
       inputTask: "",
-      id: [],
-      num: 0,
+      // id: [],
+      // num: 0,
       editableTask: false
     };
   }
-  componentDidMount() {
-    let ids = new Set();
-    for (let index = 0; index < 1000; index++) {
-      ids.add(Math.floor(Math.random() * 1000 + 1));
-    }    
-    this.setState({
-      id: [...ids],
-    });   
-  }
+  // componentDidMount() {
+  //   let ids = new Set();
+  //   for (let index = 0; index < 1000; index++) {
+  //     ids.add(Math.floor(Math.random() * 1000 + 1));
+  //   }    
+  //   this.setState({
+  //     id: [...ids],
+  //   });   
+  // }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.editableTask ) {
@@ -41,7 +42,8 @@ class TodoForm extends Component {
 
   makeTask = () => {
     const newTask = {
-      id: this.state.id[this.state.num],
+      // id: this.state.id[this.state.num],
+      id: v4(),
       value: this.state.inputTask,
     };
     this.setState((prevState) => ({
