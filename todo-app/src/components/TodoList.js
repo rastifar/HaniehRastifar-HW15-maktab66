@@ -5,14 +5,7 @@ import TodoItem from "./TodoItem";
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    // this.list = [this.props.todos.map(item => item);
     this.state = {
-      // list: [
-      //   { id: 1, title: "1" },
-      //   { id: 2, title: "2" },
-      //   { id: 3, title: "3" },
-      //   { id: 4, title: "4" },
-      // ],
       list: this.props.todos,
     };
   }
@@ -24,30 +17,27 @@ class TodoList extends Component {
     }
   }
   deleteHandler = (item) => {
-    // this.props.todos.splice(item, 1);
-    console.log(item.id);
-    console.log(this.props.todos);
-    console.log("list", this.state.list);
-    // const list = [...this.state.list];
-    // const list = this.props.todos;
-    // console.log(this.state.list);
-    // filter out the item being deleted
+    console.log("delete in todo list ",item);
     this.props.handleTodosInRemove(item);
     const updatedList = this.state.list.filter((todo) => todo.id !== item.id);
-
-    // const updatedList = list.filter(item => item.id !== id);
-    // this.props.todos = updatedList
     this.setState({ list: updatedList });
+    console.log("todolist dl ",this.state.list);
   };
   editHandler = (item) => {
-    console.log('todolist:',item);
-     this.props.handleTodosInEdit(item)
+    console.log("edit in todo List :", item);
+    this.props.handleTodosInEdit(item);   
+    this.setState((prevState) => ({
+      list: prevState.list.map((obj) =>
+        obj.id === item.id ? Object.assign(obj, { value: item.value }) : obj
+      ),
+    }));
+    console.log("todolist edit ",this.state.list);
     // const updatedList = this.state.list.filter(todo => todo.id !== item.id)
 
     // // const updatedList = list.filter(item => item.id !== id);
     // // this.props.todos = updatedList
     // this.setState({ list: updatedList });
-  }
+  };
   render() {
     const { list } = this.state;
     return (
@@ -59,14 +49,13 @@ class TodoList extends Component {
                 key={item.id}
                 id={item.id}
                 title={item.value}
-                remove={() => this.deleteHandler(item)}
+                remove={()=>this.deleteHandler(item)}
                 edit={this.editHandler}
               />
             ))}
           </Col>
         </Row>
       </Container>
-      //   </div>
     );
   }
 }
