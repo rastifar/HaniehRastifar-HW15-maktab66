@@ -1,4 +1,4 @@
 # Todo-app
-A simple todo react js app to track the todos
+A todo react js app to track the todos
 
-![](screenshot)
+![](screenshot.png)
